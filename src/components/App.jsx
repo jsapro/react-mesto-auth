@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -11,6 +12,9 @@ import "../index.css";
 import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithSubmit from "./PopupWithSubmit";
+import Register from "./Register";
+import Login from "./Login";
+import Test from "./Test";
 
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -144,59 +148,71 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <Header />
+    <BrowserRouter>
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="page">
+          <Header />
+          <Routes>
+            <Route path="/test" element={<Test />} />
+            <Route path="/signup" element={<Register />} />
+            <Route path="/signin" element={<Login />} />
+            <Route
+              path="/main"
+              element={
+                <>
+                  <Main
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleCardDelete}
+                    cards={cards}
+                  />
 
-        <Main
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-          cards={cards}
-        />
+                  {/*<!-- Попап редактирования профиля --> */}
+                  <EditProfilePopup
+                    isOpen={isEditProfilePopupOpen}
+                    onClose={closeAllPopups}
+                    onUpdateUser={handleupdateUser}
+                    isLoading={isLoading}
+                  />
 
-        {/*<!-- Попап редактирования профиля --> */}
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleupdateUser}
-          isLoading={isLoading}
-        />
+                  {/* <!-- Попап добавления карточки --> */}
+                  <AddPlacePopup
+                    onAddPlace={handleAddPlaceSubmit}
+                    onClose={closeAllPopups}
+                    isOpen={isAddPlacePopupOpen}
+                    isLoading={isLoading}
+                  />
 
-        {/* <!-- Попап добавления карточки --> */}
-        <AddPlacePopup
-          onAddPlace={handleAddPlaceSubmit}
-          onClose={closeAllPopups}
-          isOpen={isAddPlacePopupOpen}
-          isLoading={isLoading}
-        />
+                  {/* <!-- Попап удаления карточки --> */}
+                  <PopupWithSubmit
+                    onClose={closeAllPopups}
+                    isLoading={isLoading}
+                    isOpen={isSubmitPopupOpen}
+                    onSubmit={handleCardDeleteApprove}
+                    cardIdToDelete={cardIdToDelete}
+                  />
 
-        {/* <!-- Попап удаления карточки --> */}
-        <PopupWithSubmit
-          onClose={closeAllPopups}
-          isLoading={isLoading}
-          isOpen={isSubmitPopupOpen}
-          onSubmit={handleCardDeleteApprove}
-          cardIdToDelete={cardIdToDelete}
-        />
+                  {/* <!-- Попап открытия карточки --> */}
+                  <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-        {/* <!-- Попап открытия карточки --> */}
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
-        {/* <!-- Попап изменения аватара --> */}
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-          isLoading={isLoading}
-        />
-
-        <Footer />
-      </div>
-    </CurrentUserContext.Provider>
+                  {/* <!-- Попап изменения аватара --> */}
+                  <EditAvatarPopup
+                    isOpen={isEditAvatarPopupOpen}
+                    onClose={closeAllPopups}
+                    onUpdateAvatar={handleUpdateAvatar}
+                    isLoading={isLoading}
+                  />
+                </>
+              }
+            />
+          </Routes>
+          <Footer />
+        </div>
+      </CurrentUserContext.Provider>
+    </BrowserRouter>
   );
 }
 

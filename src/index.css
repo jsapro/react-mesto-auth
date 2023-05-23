@@ -55,3 +55,71 @@
 @import url("./blocks/profile/__photo/profile__photo.css");
 @import url("./blocks/profile/__avatar-button/profile__avatar-button.css");
 
+.auth {
+    color: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Inter';
+}
+
+.auth__name {
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    margin: 0;
+    padding-top: 20px;
+}
+
+.auth__form {
+    width: 100%;
+}
+
+.auth__input {
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+}
+
+.auth__input_email {
+    margin-top: 50px;
+}
+
+.auth__input_email::placeholder {
+    font-weight: 400;
+    color: #CCCCCC;
+    border: none;
+}
+
+.auth__input_password {
+    margin-top: 30px;
+}
+
+.auth__input_password::placeholder {
+    font-weight: 400;
+    color: #CCCCCC;
+}
+
+.auth__button {
+    width: 100%;
+    margin-top: 216px;
+    padding: 15px 84px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+    border: none;
+    border-radius: 2px;
+}
+
+.auth__invitation {
+    width: 100%;
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 17px;
+}
