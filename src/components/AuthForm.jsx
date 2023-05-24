@@ -22,7 +22,7 @@ const AuthForm = ({ formName, buttonText, invitationText }) => {
       </form>
       <div className="auth__invitation-wrapper">
         <p className="auth__invitation-text">{invitationText}</p>
-        <Link className="auth__invitation-link" to="/signin">{invitationText ? "Войти" : ""}</Link>
+        <Link className="auth__invitation-link" to="/sign-in">{invitationText ? "Войти" : ""}</Link>
       </div>
     </section>
   );

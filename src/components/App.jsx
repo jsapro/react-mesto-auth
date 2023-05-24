@@ -152,8 +152,8 @@ function App() {
           <Header />
           <Routes>
             <Route path="/test" element={<Test />} />
-            <Route path="/signup" element={<Register />} />
-            <Route path="/signin" element={<Login />} />
+            <Route path="/sign-up" element={<Register />} />
+            <Route path="/sign-in" element={<Login />} />
             <Route
               path="/main"
               element={
