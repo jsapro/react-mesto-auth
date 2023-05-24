@@ -44,8 +44,6 @@ function App() {
       .catch((e) => console.log(`ошибка-Promise.all: ${e}`));
   }, []);
 
-  // если убрать React.useCallback то при лайке рендерятся ВСЕ карточки заново
-  // если React.useCallback оставить то при лайке рендерится только 1 карточка
   const handleCardLike = React.useCallback(
     (card, isLiked) => {
       api
@@ -159,56 +157,54 @@ function App() {
             <Route
               path="/main"
               element={
-                <>
-                  <Main
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onCardClick={handleCardClick}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
-                    cards={cards}
-                  />
-
-                  {/*<!-- Попап редактирования профиля --> */}
-                  <EditProfilePopup
-                    isOpen={isEditProfilePopupOpen}
-                    onClose={closeAllPopups}
-                    onUpdateUser={handleupdateUser}
-                    isLoading={isLoading}
-                  />
-
-                  {/* <!-- Попап добавления карточки --> */}
-                  <AddPlacePopup
-                    onAddPlace={handleAddPlaceSubmit}
-                    onClose={closeAllPopups}
-                    isOpen={isAddPlacePopupOpen}
-                    isLoading={isLoading}
-                  />
-
-                  {/* <!-- Попап удаления карточки --> */}
-                  <PopupWithSubmit
-                    onClose={closeAllPopups}
-                    isLoading={isLoading}
-                    isOpen={isSubmitPopupOpen}
-                    onSubmit={handleCardDeleteApprove}
-                    cardIdToDelete={cardIdToDelete}
-                  />
-
-                  {/* <!-- Попап открытия карточки --> */}
-                  <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-
-                  {/* <!-- Попап изменения аватара --> */}
-                  <EditAvatarPopup
-                    isOpen={isEditAvatarPopupOpen}
-                    onClose={closeAllPopups}
-                    onUpdateAvatar={handleUpdateAvatar}
-                    isLoading={isLoading}
-                  />
-                </>
+                <Main
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onEditAvatar={handleEditAvatarClick}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                  cards={cards}
+                />
               }
             />
           </Routes>
+
+          {/*<!-- Попап редактирования профиля --> */}
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleupdateUser}
+            isLoading={isLoading}
+          />
+
+          {/* <!-- Попап добавления карточки --> */}
+          <AddPlacePopup
+            onAddPlace={handleAddPlaceSubmit}
+            onClose={closeAllPopups}
+            isOpen={isAddPlacePopupOpen}
+            isLoading={isLoading}
+          />
+
+          {/* <!-- Попап удаления карточки --> */}
+          <PopupWithSubmit
+            onClose={closeAllPopups}
+            isLoading={isLoading}
+            isOpen={isSubmitPopupOpen}
+            onSubmit={handleCardDeleteApprove}
+            cardIdToDelete={cardIdToDelete}
+          />
+
+          {/* <!-- Попап открытия карточки --> */}
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
+          {/* <!-- Попап изменения аватара --> */}
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+            isLoading={isLoading}
+          />
           <Footer />
         </div>
       </CurrentUserContext.Provider>
