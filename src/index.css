@@ -139,3 +139,13 @@
     text-decoration: none;
     color: #FFFFFF;
 }
+
+.header__link {
+    padding: 52px 0 46px;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
