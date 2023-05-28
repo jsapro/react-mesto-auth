@@ -9,7 +9,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import api from "../utils/api";
-import {register, authorize}  from "../utils/auth-api.js"
+import {register, authorize, checkToken}  from "../utils/auth-api.js"
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithSubmit from "./PopupWithSubmit";
 import Register from "./Register";
