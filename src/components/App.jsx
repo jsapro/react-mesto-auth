@@ -8,13 +8,14 @@ import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import "../index.css";
 import api from "../utils/api";
+import {register, authorize}  from "../utils/auth-api.js"
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithSubmit from "./PopupWithSubmit";
 import Register from "./Register";
 import Login from "./Login";
 import Test from "./Test";
+import "../index.css";
 
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);

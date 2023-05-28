@@ -1,8 +1,7 @@
 import React from "react";
 
 const InfoTooltip = (props) => {
-  console.log("InfoTooltip");
-  console.log(`иконка ${props.children}`);
+  // console.log("InfoTooltip");
   return (
     <section className={`popup ${true ? "popup_opened" : null}`}>
       <div className="popup__container">
