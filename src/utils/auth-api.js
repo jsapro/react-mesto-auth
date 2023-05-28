@@ -8,7 +8,7 @@ export const register = (password, email) => {
     },
     body: JSON.stringify({
       password: "somepassword",
-      email: "email-5@yandex.ru",
+      email: "email-10@yandex.ru",
     }),
   })
     .then((res) => {
@@ -22,10 +22,29 @@ export const register = (password, email) => {
 };
 
 export const authorize = () => {
+  return fetch(`${BASE_URL}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      password: "somepassword",
+      email: "email-10@yandex.ru",
+    }),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => console.log(`Ошибка авторизации: ${err.message}`));
+};
 
-}
+
 
 // register();
+// authorize();
 //
 //
 //
