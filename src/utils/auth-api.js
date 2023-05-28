@@ -1,5 +1,12 @@
 const BASE_URL = "https://auth.nomoreparties.co";
 
+const checkResponce = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.statusText}`);
+};
+
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
@@ -8,15 +15,10 @@ export const register = (password, email) => {
     },
     body: JSON.stringify({
       password: "somepassword",
-      email: "email-19@yandex.ru",
+      email: "email-20@yandex.ru",
     }),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.statusText}`);
-    })
+    .then((res) => checkResponce(res))
     .then((data) => {
       return data;
     })
@@ -31,15 +33,10 @@ export const authorize = () => {
     },
     body: JSON.stringify({
       password: "somepassword",
-      email: "email-19@yandex.ru",
+      email: "email-20@yandex.ru",
     }),
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.statusText}`);
-    })
+    .then((res) => checkResponce(res))
     .then((data) => {
       localStorage.setItem("jwt", data.token);
       return data;
@@ -55,20 +52,9 @@ export const checkToken = () => {
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.statusText}`);
-    })
+    .then((res) => checkResponce(res))
     .then((data) => {
       return data;
     })
     .catch((err) => console.log(err));
 };
-
-// register();
-// authorize();
-// checkToken();
-//
-//
