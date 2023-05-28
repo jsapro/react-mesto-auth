@@ -1,6 +1,5 @@
 const BASE_URL = "https://auth.nomoreparties.co";
 
-
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
@@ -9,17 +8,19 @@ export const register = (password, email) => {
     },
     body: JSON.stringify({
       password: "somepassword",
-      email: "email-15@yandex.ru",
+      email: "email-19@yandex.ru",
     }),
   })
     .then((res) => {
-      return res.json();
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.statusText}`);
     })
-    .then((res) => {
-      console.log(res);
-      return res;
+    .then((data) => {
+      return data;
     })
-    .catch((err) => console.log(`Ошибка регистрации: ${err.message}`));
+    .catch((err) => console.log(err));
 };
 
 export const authorize = () => {
@@ -30,17 +31,20 @@ export const authorize = () => {
     },
     body: JSON.stringify({
       password: "somepassword",
-      email: "email-15@yandex.ru",
+      email: "email-19@yandex.ru",
     }),
   })
     .then((res) => {
-      return res.json();
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.statusText}`);
     })
-    .then((res) => {
-      localStorage.setItem("jwt", res.token);
-      return res;
+    .then((data) => {
+      localStorage.setItem("jwt", data.token);
+      return data;
     })
-    .catch((err) => console.log(`Ошибка авторизации: ${err.message}`));
+    .catch((err) => console.log(err));
 };
 
 export const checkToken = () => {
@@ -52,15 +56,15 @@ export const checkToken = () => {
     },
   })
     .then((res) => {
-      return res.json();
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.statusText}`);
     })
-    .then((res) => {
-      console.log(res);
-      return res;
+    .then((data) => {
+      return data;
     })
-    .catch((err) => {
-      console.log(`Ошибка проверки токена: ${err.message}`);
-    });
+    .catch((err) => console.log(err));
 };
 
 // register();
@@ -68,4 +72,3 @@ export const checkToken = () => {
 // checkToken();
 //
 //
-

@@ -9,13 +9,17 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import api from "../utils/api";
-import {register, authorize, checkToken}  from "../utils/auth-api.js"
+import * as auth from "../utils/auth-api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithSubmit from "./PopupWithSubmit";
 import Register from "./Register";
 import Login from "./Login";
 import Test from "./Test";
 import "../index.css";
+
+// auth.register();
+// auth.authorize();
+// auth.checkToken();
 
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);
