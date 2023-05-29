@@ -43,6 +43,10 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const [userData, setUserData] = useState("");
+
+  const [userPassword, setUserPassword] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,14 +65,11 @@ function App() {
   const handleTokenCheck = () => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
-      auth.checkToken(jwt).then(({ data }) => {
-        console.log(data.email);
-        console.log(data._id);
-        console.log("loggedIn-1", loggedIn);
-        if (data._id) {
+      auth.checkToken(jwt).then(( data ) => {
+        if (data?.email) {
+          setUserData(data);
           setLoggedIn(true);
           navigate("/", { replace: true });
-          console.log("loggedIn-2", loggedIn);
         }
       });
     }
@@ -175,14 +176,45 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
+  const handleRegisterSubmit = () => {
+    //проверить токен
+    //если ОК, то
+    navigate("/sign-in", {replace: true});
+  };
+
+  const handleLoginSubmit = () => {
+    //проверить токен
+    //если ОК, то
+    setLoggedIn(true)
+    navigate("/", {replace: true})
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
+        <Header userData={userData} loggedIn={loggedIn} />
         <Routes>
           <Route path="/test" element={<Test />} />
-          <Route path="/sign-up" element={<Register />} />
-          <Route path="/sign-in" element={<Login />} />
+          <Route
+            path="/sign-up"
+            element={
+              <Register
+                onSubmit={handleRegisterSubmit}
+                userData={userData}
+                userPassword={userPassword}
+              />
+            }
+          />
+          <Route
+            path="/sign-in"
+            element={
+              <Login
+                onSubmit={handleLoginSubmit}
+                userData={userData}
+                userPassword={userPassword}
+              />
+            }
+          />
           <Route
             path="/"
             element={
@@ -199,7 +231,7 @@ function App() {
               />
             }
           />
-          <Route path="*" element={<Navigate to="/sign-in" />}/>
+          <Route path="*" element={<Navigate to="/sign-in" />} />
         </Routes>
 
         {/*<!-- Попап редактирования профиля --> */}
