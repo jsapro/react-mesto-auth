@@ -21,7 +21,7 @@ export default function Header() {
       {location.pathname === "/" && (
         <div className="header__info-wrapper">
           <p className="header__email">email-20@yandex.ru</p>
-          <NavLink to="/sign-up" className="header__navlink">
+          <NavLink to="/sign-in" className="header__navlink">
             Выйти
           </NavLink>
         </div>

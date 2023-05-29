@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const AuthForm = ({ formName, buttonText, invitationText }) => {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
+
   return (
     <section className="auth">
       <h1 className="auth__name">{formName}</h1>
@@ -10,6 +16,7 @@ const AuthForm = ({ formName, buttonText, invitationText }) => {
           className="auth__input auth__input_email"
           type="email"
           placeholder="Email"
+          ref={inputRef}
         />
         <input
           className="auth__input auth__input_password"
@@ -22,7 +29,9 @@ const AuthForm = ({ formName, buttonText, invitationText }) => {
       </form>
       <div className="auth__invitation-wrapper">
         <p className="auth__invitation-text">{invitationText}</p>
-        <Link className="auth__invitation-link" to="/sign-in">{invitationText ? "Войти" : ""}</Link>
+        <Link className="auth__invitation-link" to="/sign-in">
+          {invitationText ? "Войти" : ""}
+        </Link>
       </div>
     </section>
   );

@@ -14,7 +14,7 @@ const Login = () => {
           Вы успешно зарегистрировались!
         </InfoTooltip>
       )}
-      {1 && (
+      {0 && (
         <InfoTooltip img={authFailImg}>
           Что-то пошло не так! Попробуйте ещё раз.
         </InfoTooltip>
