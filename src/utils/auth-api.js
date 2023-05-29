@@ -44,12 +44,12 @@ export const authorize = () => {
     .catch((err) => console.log(err));
 };
 
-export const checkToken = () => {
+export const checkToken = (jwt) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      Authorization: `Bearer ${jwt}`,
     },
   })
     .then((res) => checkResponce(res))

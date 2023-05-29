@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -14,6 +14,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithSubmit from "./PopupWithSubmit";
 import Register from "./Register";
 import Login from "./Login";
+import ProtectedRouteElement from "./ProtectedRoute";
 import Test from "./Test";
 import "../index.css";
 
@@ -40,6 +41,10 @@ function App() {
 
   const [cardIdToDelete, setCardIdToDelete] = useState("");
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     Promise.all([api.getUserInfoFromServer(), api.getInitialCards()])
       .then(([userData, initialCards]) => {
@@ -48,6 +53,26 @@ function App() {
       })
       .catch((e) => console.log(`ошибка-Promise.all: ${e}`));
   }, []);
+
+  useEffect(() => {
+    handleTokenCheck();
+  }, []);
+
+  const handleTokenCheck = () => {
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+      auth.checkToken(jwt).then(({ data }) => {
+        console.log(data.email);
+        console.log(data._id);
+        console.log("loggedIn-1", loggedIn);
+        if (data._id) {
+          setLoggedIn(true);
+          navigate("/", { replace: true });
+          console.log("loggedIn-2", loggedIn);
+        }
+      });
+    }
+  };
 
   const handleCardLike = React.useCallback(
     (card, isLiked) => {
@@ -151,69 +176,70 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <CurrentUserContext.Provider value={currentUser}>
-        <div className="page">
-          <Header />
-          <Routes>
-            <Route path="/test" element={<Test />} />
-            <Route path="/sign-up" element={<Register />} />
-            <Route path="/sign-in" element={<Login />} />
-            <Route
-              path="/main"
-              element={
-                <Main
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onEditAvatar={handleEditAvatarClick}
-                  onCardClick={handleCardClick}
-                  onCardLike={handleCardLike}
-                  onCardDelete={handleCardDelete}
-                  cards={cards}
-                />
-              }
-            />
-          </Routes>
-
-          {/*<!-- Попап редактирования профиля --> */}
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleupdateUser}
-            isLoading={isLoading}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <Header />
+        <Routes>
+          <Route path="/test" element={<Test />} />
+          <Route path="/sign-up" element={<Register />} />
+          <Route path="/sign-in" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRouteElement
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+                cards={cards}
+                element={Main}
+                loggedIn={loggedIn}
+              />
+            }
           />
+          <Route path="*" element={<Navigate to="/sign-in" />}/>
+        </Routes>
 
-          {/* <!-- Попап добавления карточки --> */}
-          <AddPlacePopup
-            onAddPlace={handleAddPlaceSubmit}
-            onClose={closeAllPopups}
-            isOpen={isAddPlacePopupOpen}
-            isLoading={isLoading}
-          />
+        {/*<!-- Попап редактирования профиля --> */}
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleupdateUser}
+          isLoading={isLoading}
+        />
 
-          {/* <!-- Попап удаления карточки --> */}
-          <PopupWithSubmit
-            onClose={closeAllPopups}
-            isLoading={isLoading}
-            isOpen={isSubmitPopupOpen}
-            onSubmit={handleCardDeleteApprove}
-            cardIdToDelete={cardIdToDelete}
-          />
+        {/* <!-- Попап добавления карточки --> */}
+        <AddPlacePopup
+          onAddPlace={handleAddPlaceSubmit}
+          onClose={closeAllPopups}
+          isOpen={isAddPlacePopupOpen}
+          isLoading={isLoading}
+        />
 
-          {/* <!-- Попап открытия карточки --> */}
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        {/* <!-- Попап удаления карточки --> */}
+        <PopupWithSubmit
+          onClose={closeAllPopups}
+          isLoading={isLoading}
+          isOpen={isSubmitPopupOpen}
+          onSubmit={handleCardDeleteApprove}
+          cardIdToDelete={cardIdToDelete}
+        />
 
-          {/* <!-- Попап изменения аватара --> */}
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-            isLoading={isLoading}
-          />
-          <Footer />
-        </div>
-      </CurrentUserContext.Provider>
-    </BrowserRouter>
+        {/* <!-- Попап открытия карточки --> */}
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
+        {/* <!-- Попап изменения аватара --> */}
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+          isLoading={isLoading}
+        />
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
