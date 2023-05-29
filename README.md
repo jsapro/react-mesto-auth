@@ -35,7 +35,7 @@ Mesto: интерактивная страница, куда можно доба
 - :wink:API
 - :wink:Отзывчивая вёрстка (адаптивная + резиновая)
 - :wink:Медиазапросы
-- :wink:Работа с макетом в Figma ([Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1))
+- :wink:Работа с макетом в Figma ([Ссылка на макет в Figma](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/Sprint-14-RU?node-id=0%3A1))
 - :wink:Grid Layout, Flexbox
 - :wink:Nested БЭМ
 - :wink:GIT

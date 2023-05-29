@@ -8,8 +8,24 @@ export default function Header() {
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="лого Mesto" />
-      {location.pathname === "/sign-up" && (<NavLink to="/sign-in" className="header__link">Войти</NavLink>)}
-      {location.pathname === "/sign-in" && (<NavLink to="/sign-up" className="header__link">Регистрация</NavLink>)}
+      {location.pathname === "/sign-up" && (
+        <NavLink to="/sign-in" className="header__navlink">
+          Войти
+        </NavLink>
+      )}
+      {location.pathname === "/sign-in" && (
+        <NavLink to="/sign-up" className="header__navlink">
+          Регистрация
+        </NavLink>
+      )}
+      {location.pathname === "/" && (
+        <div className="header__info-wrapper">
+          <p className="header__email">email-20@yandex.ru</p>
+          <NavLink to="/sign-up" className="header__navlink">
+            Выйти
+          </NavLink>
+        </div>
+      )}
     </header>
   );
 }
