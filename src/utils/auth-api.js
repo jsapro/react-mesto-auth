@@ -24,23 +24,21 @@ export const register = ({password, email}) => {
     })
 };
 
-export const authorize = () => {
+export const authorize = ({email, password}) => {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      password: "somepassword",
-      email: "email-21@yandex.ru",
+      password: password,
+      email: email,
     }),
   })
     .then((res) => checkResponce(res))
     .then((data) => {
-      localStorage.setItem("jwt", data.token);
       return data;
     })
-    .catch((err) => console.log(err));
 };
 
 export const checkToken = (jwt) => {

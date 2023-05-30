@@ -18,10 +18,6 @@ import ProtectedRouteElement from "./ProtectedRoute";
 import Test from "./Test";
 import "../index.css";
 
-// auth.register();
-// auth.authorize();
-// auth.checkToken();
-
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);
 
@@ -65,13 +61,16 @@ function App() {
   const handleTokenCheck = () => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
-      auth.checkToken(jwt).then((data) => {
-        if (data?.email) {
-          setUserData(data);
-          setLoggedIn(true);
-          navigate("/", { replace: true });
-        }
-      });
+      auth
+        .checkToken(jwt)
+        .then((data) => {
+          if (data?.email) {
+            setUserData(data);
+            setLoggedIn(true);
+            navigate("/", { replace: true });
+          }
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -177,26 +176,45 @@ function App() {
   }
 
   const handleRegisterSubmit = (formValue) => {
-    auth.register(formValue).then(({ data }) => {
-      if (data?.email) {
-        setUserData(data);
-        navigate("/sign-in", { replace: true });
-      }
-    })
-    .catch(err => console.log(err))
+    auth
+      .register(formValue)
+      .then(({ data }) => {
+        if (data?.email) {
+          setUserData(data);
+          navigate("/sign-in", { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
-  const handleLoginSubmit = () => {
-    //проверить токен
-    //если ОК, то
-    setLoggedIn(true);
-    navigate("/", { replace: true });
+  const handleLoginSubmit = (formValue) => {
+    auth
+      .authorize(formValue)
+      .then((data) => {
+        if (data?.token) {
+          localStorage.setItem("jwt", data.token);
+          setUserData(formValue)
+          setLoggedIn(true);
+          navigate("/", { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleSignOut = () => {
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    navigate("/sign-in", {replace: true});
   };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header userData={userData} loggedIn={loggedIn} />
+        <Header
+          userData={userData}
+          loggedIn={loggedIn}
+          handleSignOut={handleSignOut}
+        />
         <Routes>
           <Route path="/test" element={<Test />} />
           <Route

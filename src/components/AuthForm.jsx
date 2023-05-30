@@ -28,7 +28,7 @@ const AuthForm = ({
     })
   };
 
-  const handleInputSubmit = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     onSubmit(formValue);
   };
@@ -36,7 +36,7 @@ const AuthForm = ({
   return (
     <section className="auth">
       <h1 className="auth__name">{formName}</h1>
-      <form className="auth__form" onSubmit={handleInputSubmit}>
+      <form className="auth__form" onSubmit={handleFormSubmit}>
         <input
           className="auth__input auth__input_email"
           type="email"
