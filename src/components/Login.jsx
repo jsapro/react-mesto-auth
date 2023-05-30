@@ -5,7 +5,7 @@ import authSuccessImg from "../images/auth-success.png";
 import authFailImg from "../images/auth-fail.png";
 
 const Login = (props) => {
-  console.log("Login");
+  // console.log("Login");
   return (
     <>
       <AuthForm formName="Вход" buttonText="Войти" {...props} />

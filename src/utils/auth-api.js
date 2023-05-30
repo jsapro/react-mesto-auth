@@ -7,22 +7,21 @@ const checkResponce = (res) => {
   return Promise.reject(`Ошибка: ${res.statusText}`);
 };
 
-export const register = (password, email) => {
+export const register = ({password, email}) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      password: "somepassword",
-      email: "email-20@yandex.ru",
+      password: password,
+      email: email,
     }),
   })
     .then((res) => checkResponce(res))
     .then((data) => {
       return data;
     })
-    .catch((err) => console.log(err));
 };
 
 export const authorize = () => {
@@ -33,7 +32,7 @@ export const authorize = () => {
     },
     body: JSON.stringify({
       password: "somepassword",
-      email: "email-20@yandex.ru",
+      email: "email-21@yandex.ru",
     }),
   })
     .then((res) => checkResponce(res))

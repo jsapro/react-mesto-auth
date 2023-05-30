@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const AuthForm = ({
@@ -11,15 +11,26 @@ const AuthForm = ({
 }) => {
   const inputRef = useRef();
 
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
+
   useEffect(() => {
     inputRef.current.focus();
   }, []);
 
-  const handleInputChange = () => {};
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValue({
+      ...formValue,
+      [name]: value,
+    })
+  };
 
   const handleInputSubmit = (e) => {
     e.preventDefault();
-    onSubmit();
+    onSubmit(formValue);
   };
 
   return (
@@ -30,6 +41,8 @@ const AuthForm = ({
           className="auth__input auth__input_email"
           type="email"
           placeholder="Email"
+          name="email"
+          value={formValue.email}
           ref={inputRef}
           onChange={handleInputChange}
         />
@@ -37,6 +50,8 @@ const AuthForm = ({
           className="auth__input auth__input_password"
           type="password"
           placeholder="Пароль"
+          name="password"
+          value={formValue.password}
           onChange={handleInputChange}
         />
         <button className="auth__button" type="submit">

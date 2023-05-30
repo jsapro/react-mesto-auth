@@ -65,7 +65,7 @@ function App() {
   const handleTokenCheck = () => {
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
-      auth.checkToken(jwt).then(( data ) => {
+      auth.checkToken(jwt).then((data) => {
         if (data?.email) {
           setUserData(data);
           setLoggedIn(true);
@@ -176,18 +176,22 @@ function App() {
       .finally(() => setIsLoading(false));
   }
 
-  const handleRegisterSubmit = () => {
-    //проверить токен
-    //если ОК, то
-    navigate("/sign-in", {replace: true});
+  const handleRegisterSubmit = (formValue) => {
+    auth.register(formValue).then(({ data }) => {
+      if (data?.email) {
+        setUserData(data);
+        navigate("/sign-in", { replace: true });
+      }
+    })
+    .catch(err => console.log(err))
   };
 
   const handleLoginSubmit = () => {
     //проверить токен
     //если ОК, то
-    setLoggedIn(true)
-    navigate("/", {replace: true})
-  }
+    setLoggedIn(true);
+    navigate("/", { replace: true });
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
