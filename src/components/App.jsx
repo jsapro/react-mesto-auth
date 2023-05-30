@@ -291,7 +291,7 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
           isLoading={isLoading}
         />
-        <Footer />
+        {loggedIn && <Footer />}
       </div>
     </CurrentUserContext.Provider>
   );
