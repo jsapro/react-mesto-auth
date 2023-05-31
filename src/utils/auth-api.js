@@ -53,5 +53,4 @@ export const checkToken = (jwt) => {
     .then(({data}) => {
       return data;
     })
-    .catch((err) => console.log(err));
 };

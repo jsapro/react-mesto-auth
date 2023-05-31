@@ -25,7 +25,7 @@ const AuthForm = ({
     setFormValue({
       ...formValue,
       [name]: value,
-    })
+    });
   };
 
   const handleFormSubmit = (e) => {

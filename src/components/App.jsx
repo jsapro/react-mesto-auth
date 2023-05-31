@@ -15,34 +15,27 @@ import PopupWithSubmit from "./PopupWithSubmit";
 import Register from "./Register";
 import Login from "./Login";
 import ProtectedRouteElement from "./ProtectedRoute";
+import InfoTooltip from "./InfoTooltip";
 import Test from "./Test";
 import "../index.css";
+import authSuccessImg from "../images/auth-success.png";
+import authFailImg from "../images/auth-fail.png";
 
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);
-
   const [currentUser, setCurrentUser] = useState({});
-
   const [cards, setCards] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
-
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [isSubmitPopupOpen, setIsSubmitPopupOpen] = useState(false);
-
   const [cardIdToDelete, setCardIdToDelete] = useState("");
-
   const [loggedIn, setLoggedIn] = useState(false);
-
-  const [userData, setUserData] = useState("");
-
+  const [userData, setUserData] = useState({});
   const [userPassword, setUserPassword] = useState("");
-
+  const [authResultPopupData, setAuthResultPopupData] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -137,6 +130,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsSubmitPopupOpen(false);
     setSelectedCard(null);
+    setIsInfoTooltipOpen(false);
   }
 
   const handleupdateUser = ({ name, about }) => {
@@ -181,10 +175,22 @@ function App() {
       .then(({ data }) => {
         if (data?.email) {
           setUserData(data);
+          setIsInfoTooltipOpen(true);
+          setAuthResultPopupData({
+            text: "Вы успешно зарегистрировались!",
+            img: authSuccessImg,
+          });
           navigate("/sign-in", { replace: true });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsInfoTooltipOpen(true);
+        setAuthResultPopupData({
+          text: "Что-то пошло не так! Попробуйте ещё раз.",
+          img: authFailImg,
+        });
+        console.log(err);
+      });
   };
 
   const handleLoginSubmit = (formValue) => {
@@ -193,18 +199,25 @@ function App() {
       .then((data) => {
         if (data?.token) {
           localStorage.setItem("jwt", data.token);
-          setUserData(formValue)
+          setUserData(formValue);
           setLoggedIn(true);
           navigate("/", { replace: true });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsInfoTooltipOpen(true);
+        setAuthResultPopupData({
+          text: "Что-то пошло не так! Попробуйте ещё раз.",
+          img: authFailImg,
+        });
+        console.log(err);
+      });
   };
 
   const handleSignOut = () => {
     setLoggedIn(false);
     localStorage.removeItem("jwt");
-    navigate("/sign-in", {replace: true});
+    navigate("/sign-in", { replace: true });
   };
 
   return (
@@ -290,6 +303,11 @@ function App() {
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
           isLoading={isLoading}
+        />
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          closeInfoTooltip={closeAllPopups}
+          authResultPopupData={authResultPopupData}
         />
         {loggedIn && <Footer />}
       </div>
