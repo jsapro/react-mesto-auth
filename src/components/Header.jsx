@@ -21,7 +21,11 @@ export default function Header({ userData, loggedIn, handleSignOut }) {
       {location.pathname === "/" && (
         <div className="header__info-wrapper">
           <p className="header__email">{loggedIn ? userData.email : null}</p>
-          <NavLink to="/sign-in" className="header__navlink" onClick={handleSignOut}>
+          <NavLink
+            to="/sign-in"
+            className="header__navlink"
+            onClick={handleSignOut}
+          >
             Выйти
           </NavLink>
         </div>

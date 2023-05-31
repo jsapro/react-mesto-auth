@@ -1,25 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import Header from "./Header";
 import Main from "./Main";
-import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
+import Register from "./Register";
+import Login from "./Login";
+import ProtectedRouteElement from "./ProtectedRoute";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import api from "../utils/api";
-import * as auth from "../utils/auth-api.js";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithSubmit from "./PopupWithSubmit";
-import Register from "./Register";
-import Login from "./Login";
-import ProtectedRouteElement from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
-import Test from "./Test";
-import "../index.css";
+import Footer from "./Footer";
 import authSuccessImg from "../images/auth-success.png";
 import authFailImg from "../images/auth-fail.png";
+import api from "../utils/api";
+import * as auth from "../utils/auth-api.js";
+import "../index.css";
 
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);
@@ -229,7 +227,6 @@ function App() {
           handleSignOut={handleSignOut}
         />
         <Routes>
-          <Route path="/test" element={<Test />} />
           <Route
             path="/sign-up"
             element={
@@ -304,11 +301,13 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
           isLoading={isLoading}
         />
+
         <InfoTooltip
           isOpen={isInfoTooltipOpen}
           closeInfoTooltip={closeAllPopups}
           authResultPopupData={authResultPopupData}
         />
+
         {loggedIn && <Footer />}
       </div>
     </CurrentUserContext.Provider>

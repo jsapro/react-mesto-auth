@@ -40,9 +40,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete, ...props }) {
         />
       </div>
       <div className="grid-card__caption">
-        <h2 className="grid-card__name">
-          {Math.random().toFixed(3) * 1000} - {card.name}
-        </h2>
+        <h2 className="grid-card__name">{card.name}</h2>
         <div className="grid-card__like-wrapper">
           <button
             onClick={handleLikeClick}

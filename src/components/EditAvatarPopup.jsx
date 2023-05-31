@@ -3,7 +3,12 @@ import PopupWithForm from "./PopupWithForm";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { useEffect } from "react";
 
-export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
+export default function EditAvatarPopup({
+  isOpen,
+  onClose,
+  onUpdateAvatar,
+  isLoading,
+}) {
   const [avatar, setAvatar] = useState("");
 
   const avatarInputRef = useRef();
