@@ -29,20 +29,22 @@ function App() {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [isSubmitPopupOpen, setIsSubmitPopupOpen] = useState(false);
   const [cardIdToDelete, setCardIdToDelete] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState({});
   const [userPassword, setUserPassword] = useState("");
   const [authResultPopupData, setAuthResultPopupData] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    Promise.all([api.getUserInfoFromServer(), api.getInitialCards()])
-      .then(([userData, initialCards]) => {
-        setCurrentUser(userData);
-        setCards(initialCards);
-      })
-      .catch((e) => console.log(`ошибка-Promise.all: ${e}`));
-  }, []);
+    if (isLoggedIn) {
+      Promise.all([api.getUserInfoFromServer(), api.getInitialCards()])
+        .then(([userData, initialCards]) => {
+          setCurrentUser(userData);
+          setCards(initialCards);
+        })
+        .catch((e) => console.log(`ошибка-Promise.all: ${e}`));
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     handleTokenCheck();
@@ -56,7 +58,7 @@ function App() {
         .then((data) => {
           if (data?.email) {
             setUserData(data);
-            setLoggedIn(true);
+            setIsLoggedIn(true);
             navigate("/", { replace: true });
           }
         })
@@ -197,7 +199,7 @@ function App() {
         if (data?.token) {
           localStorage.setItem("jwt", data.token);
           setUserData(formValue);
-          setLoggedIn(true);
+          setIsLoggedIn(true);
           navigate("/", { replace: true });
         }
       })
@@ -212,7 +214,7 @@ function App() {
   };
 
   const handleSignOut = () => {
-    setLoggedIn(false);
+    setIsLoggedIn(false);
     localStorage.removeItem("jwt");
     navigate("/sign-in", { replace: true });
   };
@@ -222,7 +224,7 @@ function App() {
       <div className="page">
         <Header
           userData={userData}
-          loggedIn={loggedIn}
+          loggedIn={isLoggedIn}
           handleSignOut={handleSignOut}
         />
         <Routes>
@@ -258,7 +260,7 @@ function App() {
                 onCardDelete={handleCardDelete}
                 cards={cards}
                 element={Main}
-                loggedIn={loggedIn}
+                loggedIn={isLoggedIn}
               />
             }
           />
@@ -307,7 +309,7 @@ function App() {
           authResultPopupData={authResultPopupData}
         />
 
-        {loggedIn && <Footer />}
+        {isLoggedIn && <Footer />}
       </div>
     </CurrentUserContext.Provider>
   );
