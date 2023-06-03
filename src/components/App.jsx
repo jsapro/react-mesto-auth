@@ -17,7 +17,6 @@ import authSuccessImg from "../images/auth-success.png";
 import authFailImg from "../images/auth-fail.png";
 import api from "../utils/api";
 import * as auth from "../utils/auth-api.js";
-import "../index.css";
 
 function App() {
   const [selectedCard, setSelectedCard] = useState(null);
