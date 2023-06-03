@@ -1,17 +1,24 @@
-# :green_circle:Проект: Mesto React App (Authentication and authorization) ([перейти:link:](https://github.com/jsapro/mesto-react-auth))
+# :green_circle:Проект: Mesto React App (Authentication and authorization) ([перейти:link:](https://jsapro.github.io/react-mesto-auth/))
 ---
 ## Практическая работа в рамках [курса Веб‑разработчик](https://practicum.yandex.ru/web/) Яндекс Практикум.
+
 <br/>
-<img align="right" src="./src/images/grid-card-heart.svg" alt="иконка сердца" height="50" width="50">
+<img align="right" src="./src/images/grid-card-heart.svg" alt="иконка сердца" height="30" width="30">
+<img align="right" src="./src/images/logo192.png" alt="иконка реакт" height="30" width="30">
+<img align="right" src="./src/images/grid-card-heart.svg" alt="иконка сердца" height="30" width="30">
+<img align="left" src="./src/images/grid-card-heart.svg" alt="иконка сердца" height="30" width="30">
+<img align="left" src="./src/images/logo192.png" alt="иконка реакт" height="30" width="30">
+<img align="left" src="./src/images/grid-card-heart.svg" alt="иконка сердца" height="30" width="30">
 <br/>
 <br/>
-<img align="right" src="./src/images/logo192.png" alt="иконка реакт" height="50" width="50">
-<br/>
-<br/>
-<img align="right" src="./src/images/grid-card-heart.svg" alt="иконка сердца" height="50" width="50">
 <br/>
 
-**Пользователи веб-приложение Mesto React App смогут:**
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=900&size=40&pause=10&center=true&width=900&lines=Try+Mesto+React+App+application)](https://git.io/typing-svg)
+
+<br/>
+
+
+<br/>**Пользователи веб-приложение Mesto React App смогут:**
 + :wink:Загружать фотографии с подписями.
 + :wink:Удалять их, если передумали.
 + :wink:Ставить лайки фотографиям друг друга.
