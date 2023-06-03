@@ -22,6 +22,9 @@
 
 @import url("./blocks/header/header.css");
 @import url("./blocks/header/__logo/header__logo.css");
+@import url("./blocks/header/__navlink/header__navlink.css");
+@import url("./blocks/header/__info-wrapper/header__info-wrapper.css");
+@import url("./blocks/header/__email/header__email.css");
 
 @import url("./blocks/popup/popup.css");
 @import url("./blocks/popup/_opened/popup_opened.css");
@@ -45,6 +48,8 @@
 @import url("./blocks/popup/__open-photo/popup__open-photo.css");
 @import url("./blocks/popup/__img/popup__img.css");
 @import url("./blocks/popup/__caption/popup__caption.css");
+@import url("./blocks/popup/__auth-img/popup__auth-img.css");
+@import url("./blocks/popup/__auth-message/popup__auth-message.css");
 
 @import url("./blocks/profile/profile.css");
 @import url("./blocks/profile/__add-button/profile__add-button.css");
@@ -55,126 +60,13 @@
 @import url("./blocks/profile/__photo/profile__photo.css");
 @import url("./blocks/profile/__avatar-button/profile__avatar-button.css");
 
-.auth {
-    color: #FFFFFF;
-    max-width: 358px;
-    margin: 0 auto;
-    text-align: center;
-    font-family: 'Inter', 'Arial', sans-serif;
-}
-
-.auth__name {
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
-    margin: 0;
-    padding-top: 20px;
-}
-
-.auth__form {
-    width: 100%;
-}
-
-.auth__input {
-    width: 100%;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #FFFFFF;
-    background-color: transparent;
-    border: none;
-    border-bottom: 2px solid #CCCCCC;
-}
-
-.auth__input_email {
-    margin-top: 47px;
-    padding-bottom: 9px;
-    /* color: aqua; */
-    /* color: #CCCCCC; */
-}
-
-.auth__input_email::placeholder {
-    font-weight: 400;
-    color: #CCCCCC;
-}
-
-.auth__input_password {
-    margin-top: 28px;
-    padding-bottom: 9px;
-}
-
-.auth__input_password::placeholder {
-    font-weight: 400;
-    color: #CCCCCC;
-}
-
-.auth__button {
-    width: 100%;
-    margin-top: 216px;
-    padding: 15px 84px;
-    /* font-weight: 400; */
-    font-size: 18px;
-    line-height: 22px;
-    color: #000000;
-    border: none;
-    border-radius: 2px;
-}
-
-.auth__invitation-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
-    margin: 15px 0 80px;
-}
-
-.auth__invitation-text {
-    margin: 0 5px 0 0;
-}
-
-
-.auth__invitation-link {
-    text-decoration: none;
-    color: #FFFFFF;
-}
-
-.header__navlink {
-    padding: 52px 0 46px;
-    font-family: 'Inter', 'Arial', sans-serif;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    color: #FFFFFF;
-    text-decoration: none;
-}
-
-.popup__auth-img {
-    padding: 60px 0 0;
-}
-
-.popup__auth-message {
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
-    text-align: center;
-    color: #000000;
-    padding: 32px 36px 60px;
-    margin: 0;
-}
-
-.header__info-wrapper {
-    display: flex;
-    align-items: baseline;
-}
-
-.header__email {
-    margin: 0;
-    padding: 51px 24px 46px 0;
-    font-family: 'Inter', 'Arial', sans-serif;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #FFFFFF;
-}
+@import url("./blocks/auth/auth.css");
+@import url("./blocks/auth/__name/auth__name.css");
+@import url("./blocks/auth/__form/auth__form.css");
+@import url("./blocks/auth/__input/auth__input.css");
+@import url("./blocks/auth/__input/_email/auth__input_email.css");
+@import url("./blocks/auth/__input/_password/auth__input_password.css");
+@import url("./blocks/auth/__button/auth__button.css");
+@import url("./blocks/auth/__invitation-wrapper/auth__invitation-wrapper.css");
+@import url("./blocks/auth/__invitation-text/auth__invitation-text.css");
+@import url("./blocks/auth/__invitation-link/auth__invitation-link.css");
