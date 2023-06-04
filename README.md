@@ -13,7 +13,7 @@
 <br/>
 <br/>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=900&size=40&pause=10&center=true&width=900&lines=Try+Mesto+React+App+application)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=900&size=40&pause=10&center=true&width=900&height=60&lines=Try+Mesto+React+App+application)](https://git.io/typing-svg)
 
 <br/>
 

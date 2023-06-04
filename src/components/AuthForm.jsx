@@ -42,6 +42,7 @@ const AuthForm = ({
           type="email"
           placeholder="Email"
           name="email"
+          required
           value={formValue.email}
           ref={inputRef}
           onChange={handleInputChange}
@@ -51,6 +52,9 @@ const AuthForm = ({
           type="password"
           placeholder="Пароль"
           name="password"
+          minLength="2"
+          maxLength="30"
+          required
           value={formValue.password}
           onChange={handleInputChange}
         />
